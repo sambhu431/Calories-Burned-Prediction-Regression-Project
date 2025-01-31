@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calories Burned Prediction</title>
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background-color: #c4c4c4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+        }
+        .container {
+            background-color:#e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #808080;
+            max-width: 700px;
+            width: 80%;
+        }
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;  
+            background: linear-gradient(to right, #acacac, #4c90ff);
+            color: #333; 
+            padding: 8px; 
+            border-radius: 5px; 
+        }
+        .container p {
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(to left, #e0dede, 
+            #dad3d3);
+            color: #333; 
+            padding: 8px; 
+            border-radius: 5px; 
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+        }
+        .form-group label {
+            flex-basis: 30%;
+        }
+        .form-group input,
+        .form-group select {
+            flex-basis: 75%;
+            padding: 8px;
+            border: 1px solid #acacac;
+            border-radius: 5px;
+            background-color: #eeeeee;
+        }
+        .form-group select {
+            background-color: #eeeeee;
+        }
+        .form-group button {
+            background-color: #5c5c5c;
+            color: #fff;
+            border: none;
+            padding: 13px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .results {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f8f0f0;
+        }
+
+    </style>
+
+
+    <script>
+
+        function validateForm() {
+            var gender = document.getElementById("gender").value;
+            var workoutType = document.getElementById("workout_type").value;
+            if (gender === "") {
+                alert("Please select a gender.");
+                return false;
+            }
+            if (workoutType === "") {
+                alert("Please select a workout type.");
+                return false;
+            }
+
+            var numericInputs = document.querySelectorAll('input[type="number"]');
+            for (var i = 0; i < numericInputs.length; i++) {
+                if (numericInputs[i].value === "") {
+                    alert("Please fill all numeric inputs.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <div class="container">
+        <h2>Calories Burned Prediction A Regression Model</h2>
+        <p> The model will estimate the number of calories burned based on your inputs.</p>
+        
+        <form action="/" id="inputForm" method="post" onsubmit="return validateForm()">
+
+            <div class="form-group">
+                <label for="Age">Age	:</label>
+                <input type="number" id="Age" name="Age" min="0" step="any" placeholder="Enter Age">
+            </div>
+
+            <div class="form-group">
+                <label for="Weight">Weight (kg) :</label>
+                <input type="number" id="Weight" name="Weight" min="0" step="any"placeholder="Enter Weight (kg)" >
+            </div>
+       
+            <div class="form-group">
+                <label for="Height">Height (m) :</label>
+                <input type="number" id="Height" name="Height" min="0" step="any" placeholder="Enter Height (m)">
+            </div>
+
+            <div class="form-group">
+                <label for="Max_BPM	">Max BPM :</label>
+                <input type="number" id="Max_BPM" name="Max_BPM" min="0" step="any" placeholder="Enter Maximum BPM">
+            </div>
+
+            <div class="form-group">
+                <label for="Avg_BPM">Avg BPM :</label>
+                <input type="number" id="Avg_BPM" name="Avg_BPM" min="0" step="any" placeholder="Enter Average BPM">
+            </div>
+
+            <div class="form-group">
+                <label for="Resting_BPM">Resting BPM :</label>
+                <input type="number" id="Resting_BPM" name="Resting_BPM" min="0" step="any" placeholder="Enter Resting BPM">
+            </div>
+
+            <div class="form-group">
+                <label for="Session_Duration">Session Duration (hours) :</label>
+                <input type="number" id="Session_Duration" name="Session_Duration" min="0" step="any" placeholder="Enter Session Duration (hours)">
+            </div>
+
+            <div class="form-group">
+                <label for="Fat_Percentage">Fat Percentage :</label>
+                <input type="number" id="Fat_Percentage" name="Fat_Percentage" min="0" step="any" placeholder="Enter Fat Percentage">
+            </div>
+
+            <div class="form-group">
+                <label for="Water_Intake">Water Intake (liters) :</label>
+                <input type="number" id="Water_Intake" name="Water_Intake" min="0" step="any" placeholder="Enter Water Intake (liters)">
+            </div>
+
+            <div class="form-group">
+                <label for="Workout_Frequency">Workout Frequency (days/week) :</label>
+                <input type="number" id="Workout_Frequency" name="Workout_Frequency" min="0" step="any" placeholder="Enter Workout Frequency (days/week)">
+            </div>
+
+            <div class="form-group">
+                <label for="Experience_Level">Experience Level :</label>
+                <input type="number" id="Experience_Level" name="Experience_Level" min="0" step="any" placeholder="Enter Experience Level">
+            </div>
+
+            <div class="form-group">
+                <label for="BMI">BMI :</label>
+                <input type="number" id="BMI" name="BMI" min="0" step="any" placeholder="Enter BMI">
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="Gender_Encoded">Select Gender:</label>
+                <select id="Gender_Encoded" name="Gender_Encoded" required>
+                    <option value="">Select Gender</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Workout_Type_Encoded">Select Workout Type:</label>
+                <select id="Workout_Type_Encoded" name="Workout_Type_Encoded" required>
+                    <option value="">Select Workout Type</option>
+                    <option value="Cardio">Cardio</option>
+                    <option value="HIIT">HIIT</option>
+                    <option value="Strength">Strength</option>
+                    <option value="Yoga">Yoga</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+
+        </form>
+
+
+        
+        
+        <div id="results" class="results">
+            <!-- Outputs sent from Flask will be displayed here -->
+            {% if results %}
+            <p> Congrats You Have Burned {{ results }} Calories </p>
+            {% endif %}
+        </div>
+
+        
+    
+
+    </div>
+
+
+</body>
+</html>
+
+
