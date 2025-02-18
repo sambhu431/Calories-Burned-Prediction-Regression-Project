@@ -1,7 +1,7 @@
 <h1> Calories Burned Prediction Regression Model </h1>
 
 # Overview
-This project involves building a regression model to predict the number of calories burned during exercise based on various input features such as age, weight, height, gender , session duration etc..
+This project involves building a regression model to predict the number of calories burned during exercise based on various input features such as age, weight, height, gender , session duration etc.. Also conducted A/B Testing Analsysis using statistic measures like chi-sqaure test , t-test , p_value , hypothesis testing etc to evaluate and have better statistical understanding of the relationship of features in the dataset.
 
 # Installation
 To get started, you'll need to have Python installed.
